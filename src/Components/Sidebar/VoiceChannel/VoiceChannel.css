@@ -1,0 +1,17 @@
+.voice-channel:hover > h5 {
+  background: #2c2f33;
+  color: white;
+  cursor: pointer;
+}
+
+.voice-channel > h5 {
+  display: flex;
+  padding: 4px 0px 4px 20px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.voice-icon {
+  padding-right: 4px;
+  font-size: 20px;
+}

@@ -1,0 +1,30 @@
+.user {
+  color: white;
+  display: flex;
+  background-color: rgba(19, 19, 19, 0.342);
+  justify-content: space-between;
+  padding: 5px 10px 5px 10px;
+}
+
+.user-detail {
+  display: flex;
+}
+
+.user-title {
+  padding-left: 10px;
+}
+
+.user-title > p {
+  font-size: smaller;
+  color: gray;
+}
+
+.user-icons {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px 0px 10px;
+}
+
+.mic-icon {
+  padding: 0px 10px 0px 10px;
+}

@@ -1,0 +1,17 @@
+.channel-list:hover > h5 {
+  background: #2c2f33;
+  color: white;
+  cursor: pointer;
+}
+
+.channel-list > h5 {
+  display: flex;
+  padding: 1px 0px 1px 20px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.channel-list-hashtag {
+  padding-right: 8px;
+  font-size: 20px;
+}

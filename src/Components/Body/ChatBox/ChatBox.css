@@ -1,0 +1,27 @@
+.chat-box {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+}
+
+.chat-box-avatar {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.timestamp {
+  font-size: 10px;
+  font-weight: normal;
+  padding-left: 15px;
+  color: rgba(128, 128, 128, 0.548);
+}
+
+.chat-box-info > p {
+  color: white;
+  font-size: 14px;
+}
+
+.chat-box-info > h4 {
+  color: purple;
+  font-size: 15px;
+}
