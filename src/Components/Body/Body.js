@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Body.css";
 import BodyHeader from "./BodyHeader/BodyHeader";
 import ChatBox from "./ChatBox/ChatBox";
@@ -6,34 +6,51 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import GifTwoToneIcon from "@material-ui/icons/GifTwoTone";
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 import CardGiftcardOutlinedIcon from "@material-ui/icons/CardGiftcardOutlined";
+import { useSelector } from "react-redux";
 
-function Body({ channelName }) {
+import {
+  selecttextChannelId,
+  selecttextChannelName,
+} from "../../features/appSlice";
+import firebase from "firebase";
+import db from "../../firebase";
+
+function Body() {
+  const textChannelId = useSelector(selecttextChannelId);
+  const textChannelName = useSelector(selecttextChannelName);
+
+  const [input, setInput] = useState("");
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    if (textChannelId) {
+      db.collection("textChannels")
+        .doc(textChannelId)
+        .collection("chats")
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setChats(snapshot.docs.map((doc) => doc.data()))
+        );
+    }
+  }, [textChannelId]);
+
+  const sendInput = (event) => {
+    event.preventDefault();
+    db.collection("textChannels").doc(textChannelId).collection("chats").add({
+      chat: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setInput("");
+  };
+
   return (
     <div className="body">
-      <BodyHeader />
+      <BodyHeader textChannelName={textChannelName} />
 
       <div className="body-chat-box">
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
-        <ChatBox />
+        {chats.map((chat) => {
+          return <ChatBox chat={chat.chat} timestamp={chat.timestamp} />;
+        })}
       </div>
       <div className="message-box">
         <AddCircleIcon
@@ -45,9 +62,17 @@ function Body({ channelName }) {
           <input
             className="text-input"
             type="text"
-            placeholder="Message #{channelName}"
+            placeholder={`Message # ${textChannelName}`}
+            disabled={!textChannelName}
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
           />
-          <button className="submit-btn" type="submit"></button>
+          <button
+            className="submit-btn"
+            type="submit"
+            disabled={!textChannelName}
+            onClick={sendInput}
+          ></button>
         </form>
 
         <GifTwoToneIcon

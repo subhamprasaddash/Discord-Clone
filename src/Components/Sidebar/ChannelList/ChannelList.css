@@ -1,3 +1,8 @@
+.channel-list {
+  display: flex;
+  justify-content: space-between;
+}
+
 .channel-list:hover > h5 {
   background: #2c2f33;
   color: white;
@@ -14,4 +19,8 @@
 .channel-list-hashtag {
   padding-right: 8px;
   font-size: 20px;
+}
+
+.channel-list-delete:hover {
+  color: rgba(245, 48, 48, 0.685);
 }

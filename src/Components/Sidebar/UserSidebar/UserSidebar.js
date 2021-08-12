@@ -4,8 +4,12 @@ import MicIcon from "@material-ui/icons/Mic";
 import MicOffIcon from "@material-ui/icons/MicOff";
 import HeadsetIcon from "@material-ui/icons/Headset";
 import { Avatar } from "@material-ui/core";
+import { selectUser } from "../../../features/userSlice";
+import { useSelector } from "react-redux";
 
-function UserSidebar({ userId, userName, avatarUrl }) {
+function UserSidebar() {
+  const user = useSelector(selectUser);
+
   const [mic, setMic] = React.useState(false);
   const toggleMic = () => {
     if (mic) {
@@ -17,10 +21,10 @@ function UserSidebar({ userId, userName, avatarUrl }) {
   return (
     <div className="user">
       <div className="user-detail">
-        <Avatar src="https://cdna.artstation.com/p/assets/images/images/029/888/414/large/joshua-cheng-d.jpg?1598947378" />
+        <Avatar src={user.photoURL} />
         <div className="user-title">
-          <h5>Chunchunmaru{userName}</h5>
-          <p>#8131{userId}</p>
+          <h5>{user.displayName}</h5>
+          <p>#{user.uid.match(/\d/g).join("").substring(0, 5)}</p>
         </div>
       </div>
       <div className="user-icons">

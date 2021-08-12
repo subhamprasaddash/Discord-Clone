@@ -11,16 +11,18 @@ export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setTextChannelId: (state, action) => {
-      state.app = action.payload;
+    setTextChannelInfo: (state, action) => {
+      state.textChannelId = action.payload.textChannelId;
+      state.textChannelName = action.payload.textChannelName;
     },
-    setVoiceChannelId: (state, action) => {
-      state.app = action.payload;
+    setVoiceChannelInfo: (state, action) => {
+      state.voiceChannelId = action.payload.voiceChannelId;
+      state.voiceChannelName = action.payload.voiceChannelName;
     },
   },
 });
 
-export const { setTextChannelId, setVoiceChannelId } = appSlice.actions;
+export const { setTextChannelInfo, setVoiceChannelInfo } = appSlice.actions;
 
 export const selecttextChannelName = (state) => state.app.textChannelName;
 export const selecttextChannelId = (state) => state.app.textChannelId;

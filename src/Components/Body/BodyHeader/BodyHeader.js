@@ -5,14 +5,17 @@ import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import InboxRoundedIcon from "@material-ui/icons/InboxRounded";
 import HelpRoundedIcon from "@material-ui/icons/HelpRounded";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { auth } from "../../../firebase";
 
-function BodyHeader({ channelName }) {
+function BodyHeader({ textChannelName }) {
   return (
     <div>
       <div className="body-header">
         <div className="body-channel-name">
           <h3>
-            <span className="body-hashtag">#</span>YouTube{channelName}
+            <span className="body-hashtag">#</span>
+            {textChannelName}
           </h3>
         </div>
         <div className="body-header-icons">
@@ -34,6 +37,11 @@ function BodyHeader({ channelName }) {
 
           <InboxRoundedIcon htmlColor="gray" className="header-icons" />
           <HelpRoundedIcon htmlColor="gray" className="header-icons" />
+          <ExitToAppIcon
+            htmlColor="gray"
+            className="header-icons"
+            onClick={() => auth.signOut()}
+          />
         </div>
       </div>
     </div>

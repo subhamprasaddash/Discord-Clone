@@ -5,7 +5,7 @@ import Sidebar from "./Components/Sidebar/Sidebar";
 import Login from "./Components/Login/Login";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser, login, logout } from "./features/userSlice";
-import auth from "./firebase";
+import { auth } from "./firebase";
 
 function App() {
   const user = useSelector(selectUser);
@@ -13,12 +13,22 @@ function App() {
 
   React.useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
-      console.log("user", userAuth);
       if (userAuth) {
+        // User is signed in.
+        dispatch(
+          login({
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            email: userAuth.email,
+            photoURL: userAuth.photoURL,
+          })
+        );
       } else {
+        //User is signed out.
+        dispatch(logout());
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app">
