@@ -5,6 +5,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import VoiceChannel from "./VoiceChannel/VoiceChannel";
 import UserSidebar from "./UserSidebar/UserSidebar";
+import firebase from "firebase";
 import db from "../../firebase";
 
 function Sidebar() {
@@ -13,7 +14,7 @@ function Sidebar() {
 
   useEffect(() => {
     db.collection("textChannels")
-      .orderBy("textChannelName", "asc")
+      .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         settextChannels(
           snapshot.docs.map((doc) => ({
@@ -25,7 +26,7 @@ function Sidebar() {
   }, []);
   useEffect(() => {
     db.collection("voiceChannels")
-      .orderBy("voiceChannelName", "asc")
+      .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         setvoiceChannels(
           snapshot.docs.map((doc) => ({
@@ -42,6 +43,7 @@ function Sidebar() {
     if (textChannelName) {
       db.collection("textChannels").add({
         textChannelName: textChannelName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     }
   };
@@ -52,6 +54,7 @@ function Sidebar() {
     if (voiceChannelName) {
       db.collection("voiceChannels").add({
         voiceChannelName: voiceChannelName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     }
   };

@@ -21,10 +21,10 @@ function UserSidebar() {
   return (
     <div className="user">
       <div className="user-detail">
-        <Avatar src={user.photoURL} />
+        <Avatar src={user.photo} />
         <div className="user-title">
-          <h5>{user.displayName}</h5>
-          <p>#{user.uid.match(/\d/g).join("").substring(0, 5)}</p>
+          <h5>{user.name}</h5>
+          <p>#{user.id.match(/\d/g).join("").substring(0, 5)}</p>
         </div>
       </div>
       <div className="user-icons">

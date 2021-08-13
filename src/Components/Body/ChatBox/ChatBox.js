@@ -1,17 +1,14 @@
 import React from "react";
 import "./ChatBox.css";
 import { Avatar } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../features/userSlice";
 
-function ChatBox({ chat, timestamp }) {
-  const user = useSelector(selectUser);
+function ChatBox({ chat, user, timestamp }) {
   return (
     <div className="chat-box">
-      <Avatar src={user.photoURL} className="chat-box-avatar" />
+      <Avatar src={user.photo} className="chat-box-avatar" />
       <div className="chat-box-info">
         <h4>
-          {user.displayName}
+          {user.name}
           <span className="timestamp">
             {new Date(timestamp?.toDate()).toString().substring(0, 25)}
           </span>

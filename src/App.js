@@ -17,10 +17,10 @@ function App() {
         // User is signed in.
         dispatch(
           login({
-            uid: userAuth.uid,
-            displayName: userAuth.displayName,
+            id: userAuth.uid,
+            name: userAuth.displayName,
             email: userAuth.email,
-            photoURL: userAuth.photoURL,
+            photo: userAuth.photoURL,
           })
         );
       } else {

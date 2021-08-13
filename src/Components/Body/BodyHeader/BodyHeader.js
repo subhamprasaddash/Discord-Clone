@@ -27,6 +27,7 @@ function BodyHeader({ textChannelName }) {
               placeholder="Search"
               name="search"
               className="search-input"
+              // Add search bar functionality
             />
             <SearchRoundedIcon
               htmlColor="gray"
